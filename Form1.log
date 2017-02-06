@@ -1,0 +1,16 @@
+Line 149: Class MSHierarchicalFlexGridLib.MSHFlexGrid of control gridgroup was not a loaded control class.
+Line 215: Class MSHierarchicalFlexGridLib.MSHFlexGrid of control gridstore was not a loaded control class.
+Line 156: The property name _ExtentX in gridgroup is invalid.
+Line 157: The property name _ExtentY in gridgroup is invalid.
+Line 158: The property name _Version in gridgroup is invalid.
+Line 159: The property name RowHeightMin in gridgroup is invalid.
+Line 160: The property name BackColorBkg in gridgroup is invalid.
+Line 162: The property name _NumberOfBands in gridgroup is invalid.
+Line 163: The property name _Band(0).Cols in gridgroup is invalid.
+Line 222: The property name _ExtentX in gridstore is invalid.
+Line 223: The property name _ExtentY in gridstore is invalid.
+Line 224: The property name _Version in gridstore is invalid.
+Line 225: The property name BackColorBkg in gridstore is invalid.
+Line 226: The property name AllowUserResizing in gridstore is invalid.
+Line 228: The property name _NumberOfBands in gridstore is invalid.
+Line 229: The property name _Band(0).Cols in gridstore is invalid.

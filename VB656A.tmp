@@ -1,0 +1,703 @@
+VERSION 5.00
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
+Object = "{E644C91B-78F7-4D86-8316-181A41A236A9}#1.0#0"; "XPButton.ocx"
+Begin VB.Form frmStockVal 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Stock Valuation"
+   ClientHeight    =   7860
+   ClientLeft      =   120
+   ClientTop       =   510
+   ClientWidth     =   11775
+   BeginProperty Font 
+      Name            =   "Tahoma"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "Form1.frx":0000
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   Picture         =   "Form1.frx":0ECA
+   ScaleHeight     =   7860
+   ScaleWidth      =   11775
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox TxtDataBase 
+      Appearance      =   0  'Flat
+      Height          =   285
+      Left            =   8520
+      TabIndex        =   14
+      Top             =   2280
+      Width           =   1815
+   End
+   Begin VB.TextBox TxtServer 
+      Appearance      =   0  'Flat
+      Height          =   285
+      Left            =   8520
+      TabIndex        =   13
+      Top             =   1920
+      Width           =   1815
+   End
+   Begin ProjetXPButton.XPButton cmdgroupselect 
+      Height          =   255
+      Left            =   4080
+      TabIndex        =   11
+      Top             =   6360
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   450
+      Caption         =   "&Select All"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin ProjetXPButton.XPButton CmdReport 
+      Height          =   495
+      Left            =   8400
+      TabIndex        =   10
+      Top             =   7080
+      Width           =   1935
+      _ExtentX        =   3413
+      _ExtentY        =   873
+      Caption         =   "Generate"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin MSHierarchicalFlexGridLib.MSHFlexGrid gridgroup 
+      Height          =   2655
+      Left            =   600
+      TabIndex        =   8
+      Top             =   3600
+      Width           =   4695
+      _ExtentX        =   8281
+      _ExtentY        =   4683
+      _Version        =   393216
+      BackColorBkg    =   -2147483634
+      Appearance      =   0
+      _NumberOfBands  =   1
+      _Band(0).Cols   =   2
+   End
+   Begin MSComCtl2.DTPicker StartDate 
+      Height          =   375
+      Left            =   1560
+      TabIndex        =   2
+      Top             =   2520
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   661
+      _Version        =   393216
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Format          =   11337729
+      CurrentDate     =   40157
+   End
+   Begin VB.ComboBox CmbBranch 
+      Height          =   315
+      Left            =   1560
+      TabIndex        =   0
+      Text            =   "Combo1"
+      Top             =   1920
+      Width           =   4215
+   End
+   Begin MSComCtl2.DTPicker EndDate 
+      Height          =   375
+      Left            =   4560
+      TabIndex        =   3
+      Top             =   2520
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   661
+      _Version        =   393216
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Format          =   11337729
+      CurrentDate     =   40157
+   End
+   Begin MSHierarchicalFlexGridLib.MSHFlexGrid gridstore 
+      Height          =   2655
+      Left            =   5640
+      TabIndex        =   9
+      Top             =   3600
+      Width           =   4695
+      _ExtentX        =   8281
+      _ExtentY        =   4683
+      _Version        =   393216
+      BackColorBkg    =   -2147483634
+      AllowUserResizing=   3
+      Appearance      =   0
+      _NumberOfBands  =   1
+      _Band(0).Cols   =   2
+   End
+   Begin ProjetXPButton.XPButton cmdstoreselect 
+      Height          =   255
+      Left            =   9120
+      TabIndex        =   12
+      Top             =   6360
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   450
+      Caption         =   "&Select All"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VB.Image ImageSelect 
+      Height          =   480
+      Left            =   600
+      Picture         =   "Form1.frx":101CA
+      Top             =   10125
+      Width           =   480
+   End
+   Begin VB.Label Label7 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Server"
+      Height          =   255
+      Left            =   7560
+      TabIndex        =   16
+      Top             =   1920
+      Width           =   855
+   End
+   Begin VB.Label Label6 
+      BackStyle       =   0  'Transparent
+      Caption         =   "DataBase"
+      Height          =   255
+      Left            =   7560
+      TabIndex        =   15
+      Top             =   2280
+      Width           =   855
+   End
+   Begin VB.Label Label5 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Product Group"
+      Height          =   255
+      Left            =   600
+      TabIndex        =   7
+      Top             =   3240
+      Width           =   1575
+   End
+   Begin VB.Label Label4 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Store Selection"
+      Height          =   255
+      Left            =   5640
+      TabIndex        =   6
+      Top             =   3240
+      Width           =   1575
+   End
+   Begin VB.Label Label3 
+      BackStyle       =   0  'Transparent
+      Caption         =   "End Date"
+      Height          =   255
+      Left            =   3240
+      TabIndex        =   5
+      Top             =   2640
+      Width           =   735
+   End
+   Begin VB.Label Label2 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Start Date"
+      Height          =   255
+      Left            =   600
+      TabIndex        =   4
+      Top             =   2640
+      Width           =   855
+   End
+   Begin VB.Label Label1 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Branch"
+      Height          =   255
+      Left            =   600
+      TabIndex        =   1
+      Top             =   1920
+      Width           =   735
+   End
+   Begin VB.Image Image2 
+      Height          =   450
+      Left            =   3480
+      Picture         =   "Form1.frx":1100C
+      Top             =   120
+      Width           =   1800
+   End
+   Begin VB.Image Image1 
+      Height          =   1110
+      Left            =   120
+      Picture         =   "Form1.frx":155C5
+      Top             =   120
+      Width           =   3360
+   End
+End
+Attribute VB_Name = "frmStockVal"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+    Dim mgroup As String, mstore As String
+    Dim mitemcode As String, i As Double
+    Dim mbranch As String, myearcode As String
+    Dim mrow As Double, mrowsel As Integer
+    Dim mstdate As String, meddate As String
+    Public cnt As New ADODB.Connection
+    Public stSQL As String
+    Public oExcel As New Application
+    Public oBook As Workbook
+    Public oSheet As Worksheet
+    Public rnStart As Range
+    Public stADO As String, AddonRate As String
+Public Function gridselectunselect(xgrid As MSHFlexGrid, xcmdbutton As XPButton, xcol As Integer, xpicture As Image)
+    Dim i As Integer
+    For i = xgrid.FixedRows To xgrid.Rows - 1
+        xgrid.Col = xcol
+        xgrid.Row = i
+        If xcmdbutton.Caption = "&Select All" Then
+            Set xgrid.CellPicture = xpicture.Picture
+        Else
+            Set xgrid.CellPicture = LoadPicture()
+        End If
+    Next
+End Function
+
+Private Sub cmdgroupselect_Click()
+    gridselectunselect gridgroup, cmdgroupselect, 0, ImageSelect
+    If cmdgroupselect.Caption = "&Select All" Then
+        cmdgroupselect.Caption = "&Unselect All"
+    Else
+        cmdgroupselect.Caption = "&Select All"
+    End If
+End Sub
+
+Private Sub cmdreport_Click()
+    Dim oExcel As Object
+    Dim oBook As Object
+    Dim ActiveSheet As Object
+    Dim rsstock As New ADODB.Recordset, rspurch As New ADODB.Recordset, rsitem As New ADODB.Recordset
+    Dim mcode As String, mname As String, mrate As Double, mval As Double, mqty As Double, mtotval As Double
+    Dim msqlstr As String, mtotqty As Double, mxqty As Double, mday As Integer, mdaydiff As Integer
+    Dim mtot(7) As Currency
+    Set oExcel = CreateObject("Excel.Application")
+    'oExcel.Visible = True
+    Set oBook = oExcel.Workbooks.Add
+    
+    'Add data to cells of the first worksheet in the new workbook
+    Set ActiveSheet = oBook.Worksheets(1)
+    
+    'mstdate = Format(StartDate.Value, "mm/dd/yyyy")
+    'meddate = Format(EndDate.Value, "mm/dd/yyyy")
+    mstdate = Format(StartDate.Value, "dd-mmm-yyyy")
+    meddate = Format(EndDate.Value, "dd-mmm-yyyy")
+    'Excel.Sheets(1).Delete
+    If DateValue(StartDate.Value) > DateValue(EndDate.Value) Then
+        MsgBox "Starting date not accept greater then ending date", vbOKOnly + vbInformation
+        Exit Sub
+    End If
+    If CmbBranch.Text = "" Then
+        MsgBox "No branch selected", vbOKOnly + vbInformation
+        Exit Sub
+    End If
+    
+    mbranch = Mid(CmbBranch.Text, 1, InStr(1, CmbBranch.Text, "-") - 1)
+    
+    groupcollect
+    If mgroup = "" Then
+        MsgBox "Dear User, No Product Group Selected", vbOKOnly + vbInformation
+        Exit Sub
+    End If
+    
+    storecollect
+    If mstore = "" Then
+        MsgBox "Dear User, No Store Selected", vbOKOnly + vbInformation
+        Exit Sub
+    End If
+    
+    reportgenerate
+End Sub
+
+Private Sub cmdstoreselect_Click()
+    gridselectunselect gridstore, cmdstoreselect, 0, ImageSelect
+    If cmdstoreselect.Caption = "&Select All" Then
+        cmdstoreselect.Caption = "&Unselect All"
+    Else
+        cmdstoreselect.Caption = "&Select All"
+    End If
+End Sub
+
+Private Sub gridgroup_Click()
+    gridgroup.Row = gridgroup.RowSel
+    gridgroup.Col = 0
+    If gridgroup.CellPicture.Type = 0 Then
+        Set gridgroup.CellPicture = ImageSelect.Picture
+    Else
+        Set gridgroup.CellPicture = LoadPicture()
+    End If
+End Sub
+
+Private Sub gridstore_Click()
+    gridstore.Row = gridstore.RowSel
+    gridstore.Col = 0
+    If gridstore.CellPicture.Type = 0 Then
+        Set gridstore.CellPicture = ImageSelect.Picture
+    Else
+        Set gridstore.CellPicture = LoadPicture()
+    End If
+End Sub
+
+Private Sub Form_Load()
+    'Call Main
+    'TxtServer.Text = sname
+    'TxtDataBase.Text = Nature + "001"
+    'On Error GoTo err:
+    'cnnData.Open "Provider=SQLOLEDB.1;User Id=sa;Password=;server=" & TxtServer.Text & ";Initial Catalog=" & TxtDataBase.Text & ""
+    'cnnData.Open "Provider=SQLOLEDB.1;User Id=sa;Password=;server=" & gSQLServer & ";Initial Catalog=" & gNature001 & ""
+    'cnnData.CommandTimeout = 1000
+    
+    'ActiveSheet.Rows.Clear
+    StartDate.Value = Date
+    EndDate.Value = Date
+    
+    Dim rsgroup As New ADODB.Recordset
+    rsgroup.CursorLocation = adUseClient
+    rsgroup.Open "select code,name from itemmaster where flag='G' order by name", cnnData, adOpenStatic, adLockReadOnly, adCmdText
+    If rsgroup.RecordCount > 0 Then
+        Set gridgroup.DataSource = rsgroup
+        gridgroup.ColWidth(0) = 500
+        gridgroup.ColWidth(1) = 0
+        gridgroup.ColWidth(2) = 4000
+    End If
+    rsgroup.Close
+    
+    Dim rsstore As New ADODB.Recordset
+    rsstore.CursorLocation = adUseClient
+    rsstore.Open "select code,name from stores group by code,name", cnnData, adOpenStatic, adLockReadOnly, adCmdText
+    If rsstore.RecordCount > 0 Then
+        Set gridstore.DataSource = rsstore
+        gridstore.ColWidth(0) = 500
+        gridstore.ColWidth(1) = 0
+        gridstore.ColWidth(2) = 4000
+    End If
+        
+    Dim rscnn As New ADODB.Recordset
+    rscnn.CursorLocation = adUseClient
+    rscnn.Open "select code+'-'+name as name from ntfatset.dbo.tfatbranch order by code", cnnData, adOpenStatic, adLockReadOnly, adCmdText
+    If rscnn.RecordCount > 0 Then
+        CmbBranch.Clear
+        Do Until rscnn.EOF
+            CmbBranch.AddItem rscnn!Name
+            rscnn.MoveNext
+        Loop
+    End If
+    rscnn.Close
+    
+End Sub
+
+Private Function groupcollect()
+    mgroup = ""
+    For i = 1 To gridgroup.Rows - 1
+        gridgroup.Col = 0
+        gridgroup.Row = i
+        If gridgroup.CellPicture.Type <> 0 Then
+            mgroup = mgroup + "'" + gridgroup.TextMatrix(i, 1) + "',"
+        End If
+    Next
+    If mgroup <> "" Then mgroup = Mid(mgroup, 1, Len(mgroup) - 1)
+End Function
+
+Private Function storecollect()
+    mstore = ""
+    For i = 1 To gridstore.Rows - 1
+        gridstore.Col = 0
+        gridstore.Row = i
+        If gridstore.CellPicture.Type <> 0 Then
+            mstore = mstore + "'" + gridstore.TextMatrix(i, 1) + "',"
+        End If
+    Next
+    If mstore <> "" Then mstore = Mid(mstore, 1, Len(mstore) - 1)
+End Function
+
+Private Function reportgenerate()
+    Dim rsstock As New ADODB.Recordset, rspurch As New ADODB.Recordset, rsitem As New ADODB.Recordset
+    Dim mcode As String, mname As String, mrate As Double, mVal1 As Double, mval As Double, mqty As Double, mtotval As Double, mtotval1 As Double
+    Dim msqlstr As String, mtotqty As Double
+    Dim mtotalPurchase As Double, mtotalIPX As Double
+    Dim mGrandTotal As Double
+    ActiveSheet.Cells(3, 2) = "Stock Valuation"
+    ActiveSheet.Cells(4, 2) = "Item Code"
+    ActiveSheet.Cells(4, 3) = "Item Name"
+    ActiveSheet.Cells(4, 4) = "Opening"
+    ActiveSheet.Cells(4, 5) = "Receive"
+    ActiveSheet.Cells(4, 6) = "Issue"
+    ActiveSheet.Cells(4, 7) = "closing Stock"
+    'Added by ritesh on 06-Feb-2013 for Care office
+    ActiveSheet.Cells(4, 8) = "Qty(Purchase)"
+    ActiveSheet.Cells(4, 9) = "Rate"
+    ActiveSheet.Cells(4, 10) = "Value"
+    ActiveSheet.Cells(4, 11) = "Qty(Inv.)"
+    ActiveSheet.Cells(4, 12) = "Inv. Rate"
+    ActiveSheet.Cells(4, 13) = "Inv. Value"
+    ActiveSheet.Cells(4, 14) = "Total Value"
+    ActiveSheet.Cells(4, 15) = "Avg. Rate"
+    
+    If findvalue("select name from sysobjects where name='tempstock'") <> "" Then cnnData.Execute "drop table tempstock"
+    If findvalue("select name from sysobjects where name='temppurch'") <> "" Then cnnData.Execute "drop table temppurch"
+    If findvalue("select name from sysobjects where name='PStock'") <> "" Then cnnData.Execute "drop table PStock"
+    'Dim msqlstr As String
+    
+    msqlstr = "select * into tempstock from (select code," _
+            & " (select name from itemmaster where code=stock.code) as name, " _
+            & " sum(case when docdate<'" + mstdate + "' then qty else 0 end) as opening, " _
+            & " sum(case when docdate>='" + mstdate + "' and qty>0 then qty else 0 end) as receive, " _
+            & " abs(sum(case when docdate>='" + mstdate + "' and qty<0 then qty else 0 end)) as issue, " _
+            & " sum(qty) as stock " _
+            & " from stock where docdate<='" + meddate + "' and " _
+            & " code in (select code from itemmaster where grp in (" + mgroup + ")) " _
+            & " and store in (" + mstore + ") and notinstock=0 and left(authorise,1)='A' " _
+            & " group by code) as a"
+    
+    cnnData.CommandTimeout = 3000
+    cnnData.Execute msqlstr
+    
+    cnnData.CommandTimeout = 3000
+    cnnData.Execute "select * into temppurch from (select yearcode,type,prefix,srl,sno,subtype,code,qty,rate,amt,docdate,touchvalue from stock where code in (select code from itemmaster where grp in (" + mgroup + ")) and subtype in ('RP','IC','IA') and type<>'IAD' and docdate<'" + meddate + "' and left(authorise,1)='A' and qty>0 and notinstock=0) as a"
+    
+    
+    'cnnData.Execute "Select * into temppurch from (Select yearcode,type,prefix,srl,sno,subtype,code,qty,rate,amt,docdate,touchvalue from stock where code in (select code from itemmaster where grp in (" + mgroup + ")) and subtype in ('RP','IC','IA')  and docdate<='" + meddate + "' and left(authorise,1)='A' and qty> 0 and notinstock=0) as a"
+    cnnData.Execute "Create Index TPurch_0 On TempPurch (yearcode,type,prefix,srl,sno)"
+    
+    cnnData.CommandTimeout = 3000
+    cnnData.Execute "Select yearcode,type,prefix,srl,sno,subtype,code,qty,rate,amt,docdate,touchvalue, substring(chlnnumber,1,11) as CYearCode,substring(chlnnumber,12,3) as CType,substring(chlnnumber,15,8) as CPrefix,substring(chlnnumber,23,5) as CSno,substring(chlnnumber,28,6) as CSrl Into PStock From Stock Where Code in (select code from itemmaster where grp in (" + mgroup + "))"
+    cnnData.Execute "Create Index PStock_0 On PStock (yearcode,type,prefix,srl,sno,Code)"
+    
+    cnnData.Execute "Alter Table Temppurch add PurRate varchar(1)"
+    cnnData.Execute "Update TempPurch set PurRate=0"
+    cnnData.Execute "Update TempPurch set Rate=IsNull((Select top 1 rate from Pstock where  YearCode=TempPurch.yearcode and Type=TempPurch.type and Prefix=TempPurch.prefix and Sno=TempPurch.sno and Srl=TempPurch.srl  And Code = TempPurch.Code),0),PurRate=1 where subtype='IC'"
+    
+    mrow = 5
+    
+    Dim mIRate As String, mQtyIPX As Double, IPXRate As Double, PurChaseRate As Double, mAddonRate As Double
+    Dim OldIpxrate As Double, OldPurchaserate As Double, OldAddonRate As Double
+    
+    rsstock.CursorLocation = adUseClient
+    'rsstock.Open "Select * from Tempstock Where Code in ('1993') and stock<>0 Order by name", cnnData, adOpenStatic, adLockReadOnly, adCmdText
+    
+    rsstock.Open "Select * from Tempstock Where stock<>0 Order by name", cnnData, adOpenStatic, adLockReadOnly, adCmdText
+    If rsstock.RecordCount > 0 Then
+        rsstock.MoveFirst
+        Do Until rsstock.EOF
+            If rsstock!stock <> 0 Then
+                mcode = rsstock!code
+                mname = rsstock!Name
+                mqty = 0
+                mQtyIPX = 0
+                mval = 0
+                mVal1 = 0
+                PurChaseRate = 0
+                OldPurchaserate = 0
+                OldIpxrate = 0
+                IPXRate = 0
+                AddonRate = 0
+                OldAddonRate = 0
+                rspurch.CursorLocation = adUseClient
+                rspurch.Open "Select code,qty,rate,amt,purrate,Subtype from temppurch where code='" + mcode + "' order by  docdate desc,touchvalue", cnnData, adOpenStatic, adLockReadOnly, adCmdText
+                AddonRate = Val(findvalue("Select IsNull(F004,'') From Addon@P Where code='" + mcode + "'"))
+            If rspurch.RecordCount > 0 Then
+                    rspurch.MoveFirst
+                    Do Until rspurch.EOF
+                    'Modify by ritesh on 06-Feb-2013 for Care office
+                    If (mQtyIPX + mqty + rspurch!Qty) <= rsstock!stock Then
+                            If rspurch!SubType <> "IA" Then
+                                If Val(rspurch!Rate) <> 0 Then
+                                    mval = mval + Round(rspurch!Qty * rspurch!Rate, 2)
+                                End If
+                                mqty = mqty + rspurch!Qty
+                                If Val(PurChaseRate) = 0 And rspurch!Rate <> 0 Then
+                                    PurChaseRate = rspurch!Rate
+                                    OldPurchaserate = PurChaseRate
+                                ElseIf Val(PurChaseRate) <> 0 And Val(OldPurchaserate) <> Val(PurChaseRate) And rspurch!Rate <> 0 Then
+                                    PurChaseRate = rspurch!Rate
+                                    OldPurchaserate = PurChaseRate
+                                ElseIf Val(PurChaseRate) <> 0 And Val(OldPurchaserate) = Val(PurChaseRate) And rspurch!Rate <> 0 Then
+                                    PurChaseRate = rspurch!Rate
+                                    OldPurchaserate = PurChaseRate
+                                End If
+                            ElseIf rspurch!Purrate = "0" And rspurch!SubType = "IA" Then
+                                If Val(rspurch!Rate) <> 0 Then
+                                    mVal1 = mVal1 + Round(rspurch!Qty * rspurch!Rate, 2)
+                                End If
+                                mQtyIPX = mQtyIPX + rspurch!Qty
+                                If Val(IPXRate) = 0 And rspurch!Rate <> 0 Then
+                                    IPXRate = rspurch!Rate
+                                    OldIpxrate = IPXRate
+                                ElseIf Val(IPXRate) <> 0 And Val(OldIpxrate) <> Val(IPXRate) Then
+                                    IPXRate = rspurch!Rate
+                                    OldIpxrate = IPXRate
+                                ElseIf Val(IPXRate) <> 0 And Val(OldIpxrate) = Val(IPXRate) And rspurch!Rate <> 0 Then
+                                    IPXRate = rspurch!Rate
+                                    OldIpxrate = IPXRate
+                                End If
+'                            ElseIf Val(AddonRate) <> 0 Then
+'                                mqty = mqty + rspurch!qty
+'                                mval = mval + Round(rspurch!qty * Val(AddonRate), 2)
+                            End If
+                            mIRate = rspurch!Purrate
+                        ElseIf (mQtyIPX + mqty + rspurch!Qty) > rsstock!stock Then
+                            If rspurch!SubType <> "IA" Then
+                                If Val(rspurch!Rate) <> 0 Then
+                                    mval = mval + Round((rsstock!stock - (mqty + mQtyIPX)) * rspurch!Rate, 2)
+                                End If
+                                mqty = rsstock!stock - mQtyIPX
+                                If Val(PurChaseRate) = 0 And Val(rspurch!Rate) <> 0 Then
+                                    PurChaseRate = rspurch!Rate
+                                    OldPurchaserate = PurChaseRate
+                                ElseIf Val(PurChaseRate) <> 0 And Val(OldPurchaserate) <> Val(PurChaseRate) Then
+                                    PurChaseRate = rspurch!Rate
+                                    OldPurchaserate = PurChaseRate
+                                ElseIf Val(PurChaseRate) <> 0 And Val(OldPurchaserate) = Val(PurChaseRate) And rspurch!Rate <> 0 Then
+                                    PurChaseRate = rspurch!Rate
+                                    OldPurchaserate = PurChaseRate
+                                End If
+                            ElseIf rspurch!Purrate = "0" And rspurch!SubType = "IA" Then
+                                If Val(rspurch!Rate) <> 0 Then
+                                    mVal1 = mVal1 + Round((rsstock!stock - (mqty + mQtyIPX)) * rspurch!Rate, 2)
+                                End If
+                                mQtyIPX = rsstock!stock - mqty
+                                If Val(IPXRate) = 0 And Val(rspurch!Rate) <> 0 Then
+                                    IPXRate = rspurch!Rate
+                                    OldIpxrate = IPXRate
+                                ElseIf Val(IPXRate) <> 0 And Val(OldIpxrate) <> Val(IPXRate) And rspurch!Rate <> 0 Then
+                                    IPXRate = rspurch!Rate
+                                    OldIpxrate = IPXRate
+                                ElseIf Val(IPXRate) <> 0 And Val(OldIpxrate) = Val(IPXRate) And rspurch!Rate <> 0 Then
+                                    IPXRate = rspurch!Rate
+                                    OldIpxrate = IPXRate
+                                End If
+'                            ElseIf Val(AddonRate) <> 0 Then
+'                                mqty = rsstock!stock
+'                                mval = mval + Round((rsstock!stock) * Val(AddonRate), 2)
+                            End If
+                            'mqty = rsstock!Stock
+                            mIRate = rspurch!Purrate
+                        End If
+                        If mqty + mQtyIPX >= rsstock!stock Then rspurch.MoveLast
+                        rspurch.MoveNext
+                    Loop
+            Else
+                mqty = rsstock!stock
+            End If
+            rspurch.Close
+                ActiveSheet.Cells(mrow, 2) = mcode
+                ActiveSheet.Cells(mrow, 3) = mname
+                ActiveSheet.Cells(mrow, 4) = Round(rsstock!opening, 0)
+                ActiveSheet.Cells(mrow, 5) = Round(rsstock!receive, 0)
+                ActiveSheet.Cells(mrow, 6) = Round(rsstock!issue, 0)
+                ActiveSheet.Cells(mrow, 7) = Round(rsstock!stock, 0)
+                'addon rate not pick as per dharani mam in this exe
+                'If Val(AddonRate) <> 0 And rsstock!stock <> 0 Then
+                '    ActiveSheet.Cells(mrow, 8) = Format(Val(AddonRate), "############0.00")
+                '    ActiveSheet.Cells(mrow, 9) = Format(rsstock!stock * Val(AddonRate), "###############0.00")
+                '    mtotval = mtotval + mval
+                'Else
+                'Modify by ritesh on 06-Feb-2013 for Care office
+                    'If mIRate = "1" Then
+                    'Else
+                    'Added By Ritesh for Rate pick from Invetry adjustment
+                       'ActiveSheet.Cells(mrow, 8) = Format(0, "############0.00")
+                       'ActiveSheet.Cells(mrow, 9) = Format(0, "###############0.00")
+                        If mqty <> 0 Then
+                            ActiveSheet.Cells(mrow, 8) = Round(mqty, 2)
+                            'ActiveSheet.Cells(mrow, 9) = Format(IIf(mval <> 0, Round(mval / mqty, 2), 0), "############0.00")
+                            If Val(PurChaseRate) <> 0 Then
+                                'ActiveSheet.Cells(mrow, 9) = Format(Round(PurChaseRate, 2), "############0.00")
+                                ActiveSheet.Cells(mrow, 9) = Format(Round(mval / mqty, 2), "############0.00")
+                            'Else
+                            '    ActiveSheet.Cells(mrow, 9) = Format(Round(AddonRate, 2), "############0.00")
+                            End If
+                            If Val(PurChaseRate) <> 0 Then
+                                If Val(mval) = 0 Then mval = Val(mqty) * Val(PurChaseRate)
+                                ActiveSheet.Cells(mrow, 10) = Format(mval, "###############0.00")
+                            'ElseIf Val(AddonRate) <> 0 Then
+                                mtotval = mtotval + mval
+                            '    mval = Val(mqty) * Val(AddonRate)
+                            End If
+                        End If
+                        If mQtyIPX <> 0 Then
+                            ActiveSheet.Cells(mrow, 11) = Round(mQtyIPX, 2)
+                            ActiveSheet.Cells(mrow, 12) = Format(IIf(mVal1 <> 0, Round(mVal1 / mQtyIPX, 2), 0), "###########0.00")
+                            'ActiveSheet.Cells(mrow, 12) = Format(Round(IPXRate, 2), "###########0.00")
+                            If Val(IPXRate) <> 0 Then
+                                If Val(mVal1) = 0 Then mVal1 = Val(mQtyIPX) * Val(IPXRate)
+                                ActiveSheet.Cells(mrow, 13) = Format(mVal1, "###############0.00")
+                                mtotval1 = mtotval1 + mVal1
+                            End If
+                        End If
+                        If Val(PurChaseRate) <> 0 Or Val(IPXRate) <> 0 Then
+                            ActiveSheet.Cells(mrow, 14) = Format(Round(mval + mVal1, 2), "###########0.00")
+                            ActiveSheet.Cells(mrow, 15) = Format(Round(Val(mval + mVal1) / rsstock!stock, 2), "###########0.00")
+                            mGrandTotal = mGrandTotal + mval + mVal1
+                        Else
+                            ActiveSheet.Cells(mrow, 14) = 0
+                            ActiveSheet.Cells(mrow, 15) = 0
+                        End If
+                    'End If
+                End If
+                mtotqty = mtotqty + rsstock!stock
+                mtotalPurchase = mtotalPurchase + mqty
+                mtotalIPX = mtotalIPX + mQtyIPX
+                If Val(mqty + mQtyIPX) <> Val(rsstock!stock) Then
+                    
+                End If
+                mrow = mrow + 1
+            'End If
+            rsstock.MoveNext
+        Loop
+        mrow = mrow + 1
+        ActiveSheet.Cells(mrow, 7) = Format(mtotqty, "#################0.00")
+        ActiveSheet.Cells(mrow, 8) = Format(mtotalPurchase, "#################0.00")
+        ActiveSheet.Cells(mrow, 11) = Format(mtotalIPX, "#################0.00")
+        ActiveSheet.Cells(mrow, 10) = Format(mtotval, "################0.00")
+        ActiveSheet.Cells(mrow, 13) = Format(mtotval1, "################0.00")
+        ActiveSheet.Cells(mrow, 14) = Format(mGrandTotal, "################0.00")
+    End If
+    rsstock.Close
+    cnnData.Close
+    oExcel.Visible = True
+    Unload Me
+End Function
+
+
